@@ -146,3 +146,5 @@
 2021-04-02 16:13:23,528:INFO:load_model(model_name=./modelo/model_pre, platform=None, authentication=None, verbose=True)
 2021-04-02 16:17:17,414:INFO:Initializing load_model()
 2021-04-02 16:17:17,414:INFO:load_model(model_name=./modelo/model_pre, platform=None, authentication=None, verbose=True)
+2021-04-02 16:19:04,323:INFO:Initializing load_model()
+2021-04-02 16:19:04,323:INFO:load_model(model_name=./modelo/model_pre, platform=None, authentication=None, verbose=True)
