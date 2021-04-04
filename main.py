@@ -5,7 +5,7 @@ from pycaret.regression import *
 
 @st.cache(suppress_st_warning=True, allow_output_mutation=True)
 def cargarModelo():
-  return load_model('./modelo/model_pre')
+  return load_model('./modelo/model_pre_clas')
 
 res = []
 
@@ -216,19 +216,26 @@ res.append(alcantarillado)
 st.sidebar.header('Servicios del Hogar')
 st.subheader("Descripción de las Preguntas Relacionadas a los Servicios del Hogar")
 
-ingresosHogar = st.sidebar.number_input('1. Ingreso Mensual Total del Hogar', 0, 100000000, 0, 1)
-st.markdown("1. Ingreso Mensual Total del Hogar")
+ingresosHogar = st.sidebar.number_input('12. Ingreso Mensual Total del Hogar', 0, 100000000, 0, 1)
+st.markdown("12. Ingreso Mensual Total del Hogar")
 res.append(ingresosHogar)
 
+numCuartos = st.sidebar.number_input('13. Incluyendo sala y comedor, ¿de cuántos cuartos o piezas dispone este hogar ?', 1, 20, 1, 1)
+st.markdown("13. Incluyendo sala y comedor, ¿de cuántos cuartos o piezas dispone este hogar ?")
+res.append(numCuartos)
+
 sent = st.sidebar.button('Predecir número de hijos')
-indi = ['EDAD_PADRE', 'P8587_PADRE', 'P6211_PADRE', 'P6240_PADRE', 'P6460_PADRE', 'P8624_PADRE', 'EDAD_MADRE', 'P8587_MADRE', 'P6211_MADRE', 'P6240_MADRE', 'P6460_MADRE', 'P8624_MADRE', 'REGION', 'CANT_HOGARES_VIVIENDA', 'CLASE', 'P1070', 'P4005', 'P4015', 'P4567', 'P8520S1', 'P8520S1A1', 'P8520S5', 'P8520S3', 'I_HOGAR']
+indi = ['EDAD_PADRE', 'P8587_PADRE', 'P6211_PADRE', 'P6240_PADRE', 'P6460_PADRE', 'P8624_PADRE', 'EDAD_MADRE', 'P8587_MADRE', 'P6211_MADRE', 
+'P6240_MADRE', 'P6460_MADRE', 'P8624_MADRE', 'REGION', 'CANT_HOGARES_VIVIENDA', 'CLASE', 'P1070', 'P4005', 'P4015', 'P4567', 'P8520S1', 'P8520S1A1', 'P8520S5', 'P8520S3', 'I_HOGAR','P5000']
 aux = pd.DataFrame([res], columns=indi)
 #st.dataframe(aux)
 
 if(sent):
   result = df_model.predict(aux)
   st.balloons()
-  st.write(result)
-  result = math.floor(result*10)
-  st.write(result)
+  if(edadMadre == 0 and edadPadre == 0):
+    st.write(0)
+  else:
+    st.write(result)
+  
 
