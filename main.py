@@ -37,10 +37,6 @@ st.text("""1: Ninguno
 13: Postgrado con titulo""") 
 res.append(nivEducativoPadre)
 
-anosEstudioPadre = st.sidebar.number_input('3. ¿Cuántos años de estudios superiores (técnicos, tecnológicos, universitarios, de posgrado, etc.), ha realizado y aprobado el padre?', 0, 50, 0, 1)
-st.markdown("""3. ¿Cuántos años de estudios superiores (técnicos, tecnológicos, universitarios, de posgrado, etc.), ha realizado y aprobado el **padre**? """)
-res.append(anosEstudioPadre)
-
 actPadre = st.sidebar.slider('4. ¿En que actividad ocupó el padre la mayor parte del tiempo LA SEMANA PASADA?', 1, 6, 1, 1)
 st.markdown("4. ¿En que actividad ocupó el **padre** la mayor parte del tiempo LA SEMANA PASADA?")
 st.text("""1 Trabajando
@@ -57,10 +53,6 @@ st.text("""0 Ningún contrato
 1 A termino Indefinido
 2 A termino fijo """)
 res.append(tipoContratoPadre)
-
-ingresosPadre = st.sidebar.number_input('6. Antes de descuentos ¿Cuánto ganó el MES PASADO el padre en este empleo? (incluya propinas y comisiones y excluya horas extras, viáticos y pagos en especie).', 0, 100000000, 0, 1)
-st.markdown("6. Antes de descuentos ¿Cuánto ganó el MES PASADO el **padre** en este empleo? (incluya propinas y comisiones y excluya horas extras, viáticos y pagos en especie).")
-res.append(ingresosPadre)
 
 # MADRE
 st.sidebar.header('Datos de Entrada de la Madre')
@@ -87,10 +79,6 @@ st.text("""1: Ninguno
 13: Postgrado con titulo""") 
 res.append(nivEducativoMadre)
 
-anosEstudioMadre = st.sidebar.number_input('3. ¿Cuántos años de estudios superiores (técnicos, tecnológicos, universitarios, de posgrado, etc.), ha realizado y aprobado la madre?', 0, 50, 0, 1)
-st.markdown("""3. ¿Cuántos años de estudios superiores (técnicos, tecnológicos, universitarios, de posgrado, etc.), ha realizado y aprobado la **madre**? """)
-res.append(anosEstudioMadre)
-
 actMadre = st.sidebar.slider('4. ¿En que actividad ocupó el madre la mayor parte del tiempo LA SEMANA PASADA?', 1, 6, 1, 1)
 st.markdown("4. ¿En que actividad ocupó la **madre** la mayor parte del tiempo LA SEMANA PASADA?")
 st.text("""1 Trabajando
@@ -107,10 +95,6 @@ st.text("""0 Ningún contrato
 1 A termino Indefinido
 2 A termino fijo """)
 res.append(tipoContratoMadre)
-
-ingresosMadre = st.sidebar.number_input('6. Antes de descuentos ¿Cuánto ganó el MES PASADO la madre en este empleo? (incluya propinas y comisiones y excluya horas extras, viáticos y pagos en especie).', 0, 100000000, 0, 1)
-st.markdown("6. Antes de descuentos ¿Cuánto ganó el MES PASADO la **madre** en este empleo? (incluya propinas y comisiones y excluya horas extras, viáticos y pagos en especie).")
-res.append(ingresosMadre)
 
 st.sidebar.header('Datos de Vivienda')
 st.subheader("Descripción de las Preguntas Relacionadas a la Vivienda")
@@ -147,49 +131,14 @@ st.text("""1 Casa
 5 Otro (carpa, contenedor, vagón, embarcación, cueva, refugio natural, etc) """)
 res.append(tipoVivienda)
 
-materialPredPared = st.sidebar.slider('5. Material predominante de las paredes exteriores', 1, 9, 1, 1)
-st.markdown("5. Material predominante de las paredes exteriores")
-st.text("""1 Bloque, ladrillo, piedra, madera pulida
-2 Tapia pisada, adobe
-3 Bahareque revocado
-4 Bahareque sin revocar
-5 Madera burda, tabla, tablón
-6 Material prefabricado
-7 Guadua, caña, esterilla, otro vegetal
-8 Zinc, tela, carbón, latas, desechos, plástico
-9 Sin paredes """)
-res.append(materialPredPared)
-
-materialPredPiso = st.sidebar.slider('6. Material predominante de los pisos', 1, 7, 1, 1)
-st.markdown("6. Material predominante de los pisos")
-st.text("""1. Alfombra o tapete de pared a pared
-2. Madera pulida y lacada, parqué
-3. Mármol
-4. Baldosa, vinilo, tableta, ladrillo, laminado
-5. Madera burda, tabla, tablón, otro vegetal
-6. Cemento, gravilla
-7. Tierra, arena """)
-res.append(materialPredPiso)
-
-materialPredTecho = st.sidebar.slider('7. ¿Cuál es el material predominantel del techo o cubierta?', 1, 7, 1, 1)
-st.markdown("7. ¿Cuál es el material predominantel del techo o cubierta")
-st.text("""1 Plancha de concreto, cemento u hormigón
-2 Tejas de barro
-3 Teja de asbesto - cemento
-4 Teja metálica o lámina de zinc
-5 Teja plástica
-6 Paja, palma u otros vegetales
-7 Material de desecho (tela, cartón,latas, plástico, otros) """)
-res.append(materialPredTecho)
-
-energia = st.sidebar.slider('8. ¿Cuenta la vivienda con el servico de energía eléctrica?', 1, 2, 1, 1)
-st.markdown("8. ¿Cuenta la vivienda con el servico de energía eléctrica?")
+energia = st.sidebar.slider('5. ¿Cuenta la vivienda con el servico de energía eléctrica?', 1, 2, 1, 1)
+st.markdown("5. ¿Cuenta la vivienda con el servico de energía eléctrica?")
 st.text("""1 Sí
 2 No """)
 res.append(energia)
 
-valTarifaElec = st.sidebar.slider('9. Según su estrato cuál es el valor de la tarifa eléctrica', 0, 9, 1, 1)
-st.markdown("9. Según su estrato cuál es el valor de la tarifa eléctrica")
+valTarifaElec = st.sidebar.slider('6. Según su estrato cuál es el valor de la tarifa eléctrica', 1, 9, 1, 1)
+st.markdown("6. Según su estrato cuál es el valor de la tarifa eléctrica")
 st.text("""1 Bajo - Bajo
 2 Bajo
 3 Medio - Bajo
@@ -201,14 +150,14 @@ st.text("""1 Bajo - Bajo
 0 Recibos sin estrato o el servicio es pirata """)
 res.append(valTarifaElec)
 
-acueducto = st.sidebar.slider('10. ¿Cuenta la vivienda con el servico de acueducto?', 1, 2, 1, 1)
-st.markdown("10. ¿Cuenta la vivienda con el servico de acueducto?")
+acueducto = st.sidebar.slider('7. ¿Cuenta la vivienda con el servico de acueducto?', 1, 2, 1, 1)
+st.markdown("7. ¿Cuenta la vivienda con el servico de acueducto?")
 st.text("""1 Sí
 2 No """)
 res.append(acueducto)
 
-alcantarillado = st.sidebar.slider('11. ¿Cuenta la vivienda con el servico de alcantarillado?', 1, 2, 1, 1)
-st.markdown("10. ¿Cuenta la vivienda con el servico de alcantarillado?")
+alcantarillado = st.sidebar.slider('8. ¿Cuenta la vivienda con el servico de alcantarillado?', 1, 2, 1, 1)
+st.markdown("8. ¿Cuenta la vivienda con el servico de alcantarillado?")
 st.text("""1 Sí
 2 No """)
 res.append(alcantarillado)
@@ -216,26 +165,36 @@ res.append(alcantarillado)
 st.sidebar.header('Servicios del Hogar')
 st.subheader("Descripción de las Preguntas Relacionadas a los Servicios del Hogar")
 
-ingresosHogar = st.sidebar.number_input('12. Ingreso Mensual Total del Hogar', 0, 100000000, 0, 1)
-st.markdown("12. Ingreso Mensual Total del Hogar")
+ingresosHogar = st.sidebar.number_input('1. Ingreso Mensual Total del Hogar', 0, 100000000, 0, 1)
+st.markdown("1. Ingreso Mensual Total del Hogar")
 res.append(ingresosHogar)
 
-numCuartos = st.sidebar.number_input('13. Incluyendo sala y comedor, ¿de cuántos cuartos o piezas dispone este hogar ?', 1, 20, 1, 1)
-st.markdown("13. Incluyendo sala y comedor, ¿de cuántos cuartos o piezas dispone este hogar ?")
+numCuartos = st.sidebar.number_input('2. Incluyendo sala y comedor, ¿de cuántos cuartos o piezas dispone este hogar ?', 1, 20, 1, 1)
+st.markdown("2. Incluyendo sala y comedor, ¿de cuántos cuartos o piezas dispone este hogar ?")
 res.append(numCuartos)
 
+numPersonasHogar = st.sidebar.number_input('3. Cantidad de personas en el hogar', 1, 20, 1, 1)
+st.markdown('3. Cantidad de personas en el hogar')
+res.append(numPersonasHogar)
+
 sent = st.sidebar.button('Predecir número de hijos')
-indi = ['EDAD_PADRE', 'P8587_PADRE', 'P6211_PADRE', 'P6240_PADRE', 'P6460_PADRE', 'P8624_PADRE', 'EDAD_MADRE', 'P8587_MADRE', 'P6211_MADRE', 
-'P6240_MADRE', 'P6460_MADRE', 'P8624_MADRE', 'REGION', 'CANT_HOGARES_VIVIENDA', 'CLASE', 'P1070', 'P4005', 'P4015', 'P4567', 'P8520S1', 'P8520S1A1', 'P8520S5', 'P8520S3', 'I_HOGAR','P5000']
+indi = ['EDAD_PADRE', 'P8587_PADRE', 'P6240_PADRE', 'P6460_PADRE', 'EDAD_MADRE', 'P8587_MADRE', 'P6240_MADRE', 'P6460_MADRE', 
+'REGION', 'CANT_HOGARES_VIVIENDA', 'CLASE', 'P1070','P8520S1', 'P8520S1A1', 'P8520S5', 'P8520S3', 'I_HOGAR','P5000','CANT_PERSONAS_HOGAR']
 aux = pd.DataFrame([res], columns=indi)
 #st.dataframe(aux)
 
+
 if(sent):
+  st.header("RESULTADO")
   result = df_model.predict(aux)
   st.balloons()
   if(edadMadre == 0 and edadPadre == 0):
-    st.write(0)
+    st.success('El numero de hijos(🧒) en el hogar es : '+str(0))
+  elif(result == numPersonasHogar):
+    if(numPersonasHogar==1): 
+      st.success('El numero de hijos(🧒) en el hogar es : '+str(0))
+    else: 
+      st.success('El numero de hijos(🧒) en el hogar es : '+str((result-2)))
   else:
-    st.write(result)
-  
+    st.success('El numero de hijos(🧒) en el hogar es : '+str(result))
 
