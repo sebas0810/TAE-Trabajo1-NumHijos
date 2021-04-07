@@ -10,7 +10,11 @@ def cargarModelo():
 res = []
 
 df_model = cargarModelo()
-st.title('Numero de hijos por familia')
+st.title('Número de Hijos en el Hogar')
+st.subheader('Video de la Aplicación')
+st.video('https://www.youtube.com/watch?v=wUGRcnpbKhM')
+
+st.sidebar.warning('Si no hay un padre o una madre en el hogar, por favor no modificar los campos de entrada correspondientes a este.')
 
 # PADRE
 st.sidebar.header('Datos de Entrada del Padre')
