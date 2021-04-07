@@ -1,0 +1,2 @@
+"0","barplot(table(datos2$CHV),main = ""Número de hogares en la vivienda"","
+"0","        xlab = ""Número"",ylab = ""Frecuencia"")"

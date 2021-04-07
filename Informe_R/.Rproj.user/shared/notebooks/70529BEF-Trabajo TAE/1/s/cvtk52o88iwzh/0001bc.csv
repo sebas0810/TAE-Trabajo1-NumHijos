@@ -1,0 +1,3 @@
+"0",""
+"0","barplot(table(datos2$NEM),xaxt = ""n"",main = ""Nivel Educativo Madre"","
+"0","        ylab = ""Frecuencia"")"

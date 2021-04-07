@@ -1,0 +1,2 @@
+"0","barplot(table(datos2$CPH),main = ""Número de personas en el hogar"","
+"0","        ylab = ""Frecuencia"")"

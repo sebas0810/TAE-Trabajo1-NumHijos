@@ -1,0 +1,3 @@
+"0",""
+"0","barplot(table(datos2$RE),xaxt = ""n"",main = ""Región"","
+"0","        ylab = ""Frecuencia"")"

@@ -1,0 +1,4 @@
+"0","par(mfrow = c(2,2))"
+"0",""
+"0","barplot(table(datos2$EL),main = ""¿Cuenta con Energía Eléctrica?"","
+"0","        ylab = ""Frecuencia"")"

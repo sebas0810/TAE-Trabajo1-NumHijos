@@ -1,0 +1,4 @@
+"0","# text(cex=1, x=c(1,2.2,3.4,4.6,5.8,7), y=-4, levels(datos2$NEP), xpd=TRUE, srt=45, pos=2)"
+"0",""
+"0","barplot(table(datos2$NEM),xaxt = ""n"",main = ""Nivel Educativo Madre"","
+"0","        xlab = ""Escolaridad"",ylab = ""Frecuencia"")"

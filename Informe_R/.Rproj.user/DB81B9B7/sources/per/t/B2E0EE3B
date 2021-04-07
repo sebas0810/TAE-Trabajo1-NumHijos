@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1617748747061.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1630142694",
+    "id" : "B2E0EE3B",
+    "lastKnownWriteTime" : 1617763700,
+    "last_content_update" : 1617763700907,
+    "path" : "D:/Escritorio/TAE/Trabajo TAE.Rmd",
+    "project_path" : "Trabajo TAE.Rmd",
+    "properties" : {
+        "cursorPosition" : "303,125",
+        "last_setup_crc32" : "68C86EECe8fa10ae",
+        "scrollLine" : "296"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

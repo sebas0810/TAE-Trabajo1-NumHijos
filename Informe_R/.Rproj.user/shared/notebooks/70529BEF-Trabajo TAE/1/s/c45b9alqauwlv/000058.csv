@@ -1,0 +1,3 @@
+"0",""
+"0",""
+"0","barplot(table(datos2$OTM),xaxt = ""n"",main = ""Ocupa Tiempo Madre"")"

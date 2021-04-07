@@ -1,0 +1,311 @@
+---
+title: "Trabajo 1."
+subtitle: "Modelo para el pronóstico del número de hijos en un hogar de Colombia."
+author:
+- "Edhy Santiago Marín Arbeláez - 1020485778"
+- "Sebastián López restrepo - 1035436293"
+- "Valentín de la Rosa Rueda - 1152205481"
+- "Juan José Martínez Posada - 1036785428"
+- "David González Jiménez - 1017252844"
+
+date: "6/4/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, fig.height = 7, fig.width = 10, fig.align = "center")
+```
+
+## Introducción.
+
+En el año 2019 el __Departamento Administrativo Nacional de Estadística__(DANE), realizó una encuesta nacional de calidad de vida (ECV 2019) a la población Colombiana. Actualmente Colombia es un país en vía de desarrollo, según cifras de banco mundial, en el 2017 Colombia fue el segundo país más desigual de América Latina y el séptimo del mundo, además la pobreza extrema en Colombia fue del 10.9% regristado en 2019 de acuerdo con la comisión económica para Latino América y el caribe (CEPAL), dichos datos reflejan una problemática creciente para el país, para poder diseñar herramientas que permitan mitigar estas problemáticas el gobierno debe conocer y clasificar lo mejor posible el estado de su población, identificando sectores vulnerables de esta y el impacto que tienen las políticas gubernamentales en la población. 
+
+Es por esto que se realiza la ECV, donde su propósito es identificar la población en condiciones de pobreza, caracterizarla y ubicarla espacialmente.
+
+A partir de la información obtenida por la ECV, se calculan indicadores para la medición de variados aspectos económicos y sociales, lo cual facilitara el diseño e impacto de los resultados para las políticas públicas.
+
+Basados en esta información se realizará un estudio sobre las variables que son influyentes al momento de determinar y posteriormente construir modelos que permitan estimar el número de hijos en un determinado hogar Colombiano. 
+
+Conocer el número hijos de un determinado hogar es de particular importancia para varios grupos sociales y económicos, por ejemplo y como se mencionó anteriormente puede ser útil para el gobierno para enfocar programas de salud, incentivos economicos y de educación, también para la ubicación de hospitales,estaciones bomberos y de policía, para que la atención sea la más rápida y eficaz posible. Para el sector privado puede ser importante para la ubicación de ciertos negocios en los que se requiera una cierta densidad de población, por ejemplo centros comerciales, centro recreativos, centros educativos, almacenes de cadena, servicios de telecomucaciones.
+
+## Objetivos.
+
+### Primarios.
+
+- Determinar las variables que podrian influir en el número de hijos en un hogar Colombiano.
+- Construir una modelo estadístico para pronósticar el número de hijos en un hogar Colombiano.
+
+### Secundarios.
+
+- Comparar varios modelos predictivos para el pronósticos del número de hijos.
+- Validar el modelo estadistico construido para el pronostico del número de hijos hogar Colombiano.
+- Elaborar un aplicacion web para el uso del modelo para los grupos interesados.
+
+## Desarrollo Experimental.
+
+### Descripción Base de Datos.
+
+La ECV 2019 se realizo entre 2 septiembre y 15 noviembre, el modo de recolección de la información fue entrevista personal asistida por computador, la población entrevistada fue escogida al azar mediante una muestra probabilística, multietápica, estratificada y de conglomerados, con el fin de evitar sesgos y asegurar una mejor calidad en la información recolectada, la encuesta fue realizada a el entrevistado(a) directo(a) mayor de 18 años que fuesen parte del hogar, así mismo para aquellas personas entre 12 y 17 años que en el momento de la encuesta trabajen o sean estudiantes universitarios.
+
+Las bases de datos utilizadas para pronósticar la variable de interés fueron extraídas de [Microdatos __DANE__](http://microdatos.dane.gov.co/index.php/catalog/678/data_dictionary) y las seleccionadas fueron las siguientes:
+
+- Característica y composición del hogar.
+- Datos de vivienda.
+- Educación.
+- Fuerza de trabajo.
+- Servicios del hogar. 
+
+Mediante el lenguaje de programacion Python se agrupo la información de tal manera que no existiran registros duplicados, registros nulos, e información irrelavante al problema.
+
+Para la selección de variables se consideraron aquellas que podrian influir para determinar número de hijos en el hogar basados en estudios previos [1] y [2], dichas variables son las siguientes: 
+
+#### __Características y composición del hogar.__
+
+- $Directorio$: (Código en la encuesta: __DIRECTORIO__).
+- $EP$: (Código en la encuesta: __P6040__) ¿Cuántos años cumplidos tiene edad padre?
+- $EM$: (Código en la encuesta: __P6040__) ¿Cuántos años cumplidos tiene edad madre?
+- $NH$: Número de hijos en el hogar. **
+
+** Se construyó a partir de la columna P6051, ya que esta contenia el parentesco que se tenía con el jefe del hogar y la respuesta era 3 si era hijo o hija, con esta información se contaban el numero de hijos y se agrupaban con el número de directorio.
+
+#### __Datos de vivienda.__
+
+- $Directorio$: (Código en la encuesta: __DIRECTORIO__).
+- $RE$: (Código en la encuesta: __REGION__)  Región a la que pertenece el hogar. 
+- $CHV$: (Código en la encuesta: __CANT_HOGARES_VIVIENDA__) Cantidad de hogares dentro de la vivienda.
+- $CL$: (Código en la encuesta: __CLASE__) Clase de vivienda.
+- $TPV$: (Código en la encuesta: __P1070__) Tipo de vivienda.
+- $MPPE$: (Código en la encuesta: __P4005__) Material predominanre de las paredes exteriores.
+- $MPP$: (Código en la encuesta: __P4015__) Material predominante de los pisos. 
+- $MPT$: (Código en la encuesta: __P4567__) Material predominante techo o cubierta. 
+- $EL$: (Código en la encuesta: __P8520S1__) ¿Cuentan con Energía Eléctrica?
+- $EST$: (Código en la encuesta: __P8520S1A1__) Estrato para tarifa.
+- $AC$: (Código en la encuesta: __P8520S5__) ¿Cuentan con Acueducto?
+- $ALC$: (Código en la encuesta: __P8520S3__) ¿Cuentan con Alcantarillado?
+
+#### __Educación.__
+
+- $Directorio$: (Código en la encuesta: __DIRECTORIO__).
+- $NEP$: (Código en la encuesta: __P8587__) ¿Nivel educativo del Padre?
+- $NEM$: (Código en la encuesta: __P8587__) ¿Nivel educativo de la Madre ?
+- $AESRP$: (Código en la encuesta: __P6211__) ¿Cuantos años de estudios superiores a realizado y aprobado padre?
+- $AESRM$: (Código en la encuesta: __P6211__) ¿Cuantos años de estudios superiores a realizado y aprobado madre?
+
+#### __Fuerza de trabajo.__
+
+- $Directorio$: (Código en la encuesta: __DIRECTORIO__).
+- $OTP$: (Código en la encuesta: __P6240__) ¿En que actividad ocupo la mayor parte del tiempo la semana pasada padre?
+- $OTM$: (Código en la encuesta: __P6240__) ¿En que actividad ocupo la mayor parte del tiempo la semana pasada madre?
+- $TCP$: (Código en la encuesta: __P6460__) ¿Tipo de contrato del Padre?
+- $TCM$: (Código en la encuesta: __P6460__) ¿Tipo de contrato de la Madre?
+- $GEP$: (Código en la encuesta: __P8624__) ¿cuánto ganó el mes pasado en este empleo Padre?
+- $GEM$: (Código en la encuesta: __P8624__) ¿cuánto ganó el mes pasado en este empleo Madre?
+
+#### __Servicios del hogar.__
+
+- $Directorio$: (Código en la encuesta: __DIRECTORIO__).
+- $IMTH$: (Código en la encuesta: __I_HOGAR__) Ingreso mensual total del hogar. 
+- $NC$: (Código en la encuesta: __P5000__) Número de cuartos incluyendo sala y comedor. 
+- $CPH$: (Código en la encuesta: __CANT_PERSONAS_HOGAR__) Cantidad de personas en el hogar. 
+
+## Gráficos Descriptivos. 
+
+```{r}
+datos1 <- read.csv2("Out All.csv",sep = ",")
+datos2 <- read.csv2("out_final.csv",sep = ",")
+
+colnames(datos1) <- c("DIRECTORIO",
+                      "EP","NEP","AESRP","OTP","TCP","GEP",
+                      "EM","NEM","AESRM","OTM","TCM","GEM",
+                      "RE","CHV","CL","TPV","MPPE","MPP","MPT",
+                      "EL","EST","AC","ALC","I_HOGAR","NH")
+
+colnames(datos2) <- c("DIRECTORIO",
+                      "EP","NEP","OTP","TCP",
+                      "EM","NEM","OTM","TCM",
+                      "RE","CHV","CL","TPV",
+                      "EL","EST","AC","ALC","I_HOGAR","NC","CPH","NH")
+
+datos2$EP <- as.integer(datos2$EP)
+datos2$EM <- as.integer(datos2$EM)
+
+datos2$NEP <- as.factor(datos2$NEP)
+datos2$NEM <- as.factor(datos2$NEM)
+
+levels(datos2$NEP) <- levels(datos2$NEM) <- c("Ninguno",
+                                  "B. Primaria","B. Secundaria","Media",
+                                  "Técnico ST","Técnico CT",
+                                  "Tecnológico ST","Tecnológico CT",
+                                  "Universitario ST","Universitario CT",
+                                  "Postgrado ST","Postgrado CT","Preescolar")
+
+levels(datos2$OTP) <- levels(datos2$OTM) <- c("Trabajando","Buscando Trabajo","Estudiando","Oficios del hogar","Incapacitado P","Otra actividad")
+
+datos2$TCP <- as.factor(datos2$TCP)
+datos2$TCM <- as.factor(datos2$TCM)
+
+levels(datos2$TCP) <- levels(datos2$TCM) <- c("Ningun contrato","Termino Indefinido","Termino Fijo")
+
+datos2$RE <- as.factor(datos2$RE)
+
+levels(datos2$RE) <- c("Caribe","Oriental","Central",
+                       "Pacífica (Sin valle)","Bogotá","Antioquia",
+                       "Valle del Cauca","San Andrés","Orinoquía - Amazonía")
+
+datos2$CL <- as.factor(datos2$CL)
+levels(datos2$CL) <- c("Cabecera", "Otros")
+
+datos2$TPV <- as.factor(datos2$TPV)
+levels(datos2$TPV) <- c("Casa","Apartamento","Cuarto(s)","Vivienda Indigena","Otros")
+
+datos2$EL <- as.factor(datos2$EL) 
+datos2$AC <- as.factor(datos2$AC)
+datos2$ALC <- as.factor(datos2$ALC)
+
+levels(datos2$EL) <- levels(datos2$AC) <- levels(datos2$ALC) <- c("Si","NO")
+
+datos2$EST <- as.factor(datos2$EST)
+
+levels(datos2$EST) <- c("Pirata","Bajo-Bajo","Bajo","Medio-Bajo","Medio",
+                        "Medio-Alto","Alto","Planta Electrica",
+                        "No conoce el Estrato")
+
+datos2$I_HOGAR <- as.numeric(datos2$I_HOGAR)
+```
+
+
+```{r}
+par(mfrow = c(2,2))
+hist((datos2$EP[datos2$EP > 3]),main = "Edad Padre",xlab = "Edad",
+     ylab = "Frecuencia")
+points(x = (mean(datos2$EP[datos2$EP > 3])),y = 0,lwd = 2,col = "red",pch = 16)
+hist((datos2$EM[datos2$EM > 3]),main = "Edad Madre",xlab = "Edad",
+     ylab = "Frecuencia")
+points(x = (mean(datos2$EM[datos2$EM > 3])),y = 0,lwd = 2,col = "red",pch = 16)
+
+barplot(table(datos2$NEP),xaxt = "n",main = "Nivel Educativo Padre",
+        ylab = "Frecuencia",las = 2)
+
+text(cex=0.9, x=c(1,2.25,3.5,4.75,6,7.25,8.5,9.75,11,12.25,13.5,14.75,16), y=-8, levels(datos2$NEM), xpd=TRUE, srt=45, pos=2)
+
+barplot(table(datos2$NEM),xaxt = "n",main = "Nivel Educativo Madre",
+        ylab = "Frecuencia")
+text(cex=0.9, x=c(1,2.25,3.5,4.75,6,7.25,8.5,9.75,11,12.25,13.5,14.75,16), y=-8, levels(datos2$NEM), xpd=TRUE, srt=45, pos=2)
+```
+En los primeros gráficos podemos ver la distribuciones de la edad tanto de padres y de madres que fueron encuestados, vemos que la media de los padres (42.5 años) es superior a la de las madres (38.9 años). También en los gráficos de la parte inferior vemos como los padres tienen un  nivel educativo menor que el de las madres, esto puede deberse ha que la educación anteriormente no era considerada tan necesaria como lo es hoy en día y desde pequeños, los niños debían ayudar a sus papás con las labores del hogar.
+
+```{r}
+par(mfrow = c(2,2))
+barplot(table(datos2$OTP),xaxt = "n",main = "Ocupa Tiempo Padre")
+# axis(1, at=seq(1,3),labels=colnames(counts), las=2)
+text(cex=1, x=c(1,2.2,3.4,4.6,5.8,7), y=-4, levels(datos2$OTP), xpd=TRUE, srt=45, pos=2)
+
+
+barplot(table(datos2$OTM),xaxt = "n",main = "Ocupa Tiempo Madre")
+text(cex=1, x=c(1,2.2,3.4,4.6,5.8,7), y=-2.5, levels(datos2$OTP), xpd=TRUE, srt=45, pos=2)
+
+barplot(table(datos2$RE),xaxt = "n",main = "Región",
+        ylab = "Frecuencia")
+text(cex=0.9, x=c(1,2.2,3.4,4.6,5.8,7,8.2,9.4,10.6), y=-2.5,
+     levels(datos2$RE), xpd=TRUE,srt=45, pos=2)
+barplot(table(datos2$CHV),main = "Número de hogares en la vivienda",
+        xlab = "Número",ylab = "Frecuencia")
+```
+En los gráficos superiores vemos como los padres se dedican en su mayoría a trabajar mientras que las madres se dedican a los oficios del hogar, esto puede reflejar como en Colombia todavía se puede decir que la sociedad es machista o tal vez que las mujeres prefieren dedicarse al hogar cuando ya tienen un hijo.
+
+Vemos como la mayoria de las viviendas solo cuentan con un hogar que es lo normal, pero de la encuesta vemos que 588 viviendas tienen 2 hogares, 88 cuentan con 3 hogares, 24 con 4 hogares y 5 viviendas cuentan con 5 hogares. 
+
+```{r}
+par(mfrow = c(2,2))
+
+barplot(table(datos2$EL),main = "¿Cuenta con Energía Eléctrica?",
+        ylab = "Frecuencia")
+barplot(table(datos2$EST),xaxt = "n",main = "Estrato para Tarifa",
+        ylab = "Frecuencia")
+text(cex=0.9, x=c(1,2.2,3.4,4.6,5.8,7,8.2,9.4,10.6), y=-2.5,
+     levels(datos2$EST), xpd=TRUE,srt=45, pos=2)
+barplot(table(datos2$AC),main = "¿Cuenta con Acueducto?",ylab = "Frecuencia")
+barplot(table(datos2$ALC),main = "¿Cuenta con Alcantarillado?",
+        ylab = "Frecuencia")
+
+```
+En estos gráficos podemos ver como la mayoría de las personas cuentan con energía eléctrica en sus hogares y también el acueducto, pero sorprende como están dividos los resultados de alcantarillado por mitad, ya que se podría inferir que el gráfico de alcantarillado deberia asemejarse al de acueducto.
+
+```{r}
+layout(matrix(c(1,1,2,2,0,3,3,0),ncol = 4,byrow = TRUE))
+
+barplot(table(datos2$TPV),main = "Tipo de Vivienda",
+        ylab = "Frecuencia")
+barplot(table(datos2$NC),main = "Número de Cuartos",
+        ylab = "Frecuencia")
+barplot(table(datos2$CPH),main = "Número de personas en el hogar",
+        ylab = "Frecuencia")
+```
+En el primer gráfico vemos como en la mayoría de encuesta las personas estan viviendo en una casa o en un apartamento que es lo más común, también vemos que en el segundo gráfico el promedio de cuartos contabilizando la sala o comedor es de 3 que se puede inferir que serían: 1 cuarto de los padres, 1 para los hijos y 1 la sala-comedor, o las casas que no tengan sala contarían con 2 cuartos para hijos.
+
+En el tercer gráfico podemos vemos que la mayoría de hogares se conforma de 2 y 3 personas.
+
+## Resultados. 
+
+Para abordar el problema y encontrar el modelo que pronostique el numero de hijos se utilizaron los lenguajes de programación de Python y R. Para Python se requirio la librería __PyCaret__ la cual tenía los modelos de clasificación estadística previamente programados, y esta misma librería se encarga de hacer el entrenamiento y validación de los modelos y permite a su vez hacer una comparación entre la precisión de los distintos modelos.
+
+### Entrenamiento y Validación del Modelo. 
+
+Para construir el modelo apropiado para pronósticar el número de hijos en un hogar Colombiano, se seleccionaron las siguientes variables:
+
+- $EP$: Edad del Padre.
+- $NEP$: Nivel Educativo del Padre.
+- $OTP$: Ocupacion del tiempo del Padre.
+- $TCP$: Tipo de contrato Padre.
+- $EM$: Edad de la Madre.
+- $NEM$: Nivel educativo de la Madre.
+- $OTM$: Ocupación de tiempo de la Madre.
+- $TCM$: Tipo de contrato de la Madre.
+- $RE$: Región del país en la cual viven.
+- $CHV$: Número de hogares en la vivienda.
+- $CL$: Clase.
+- $TPV$: Tipo de vivienda.
+- $EL$: ¿Cuentan con Energía Eléctrica?
+- $EST$: Estrato para tarifa.
+- $AC$: ¿Cuentan con Acueducto?
+- $ALC$: ¿Cuentan con Alcantarillado?
+- $IMTH$: Ingreso mensual total del hogar.
+- $NC$: Número de Cuartos.
+- $CPH$: Cantidad de personas en el hogar.
+
+Para la selección del modelo mas apropiado y como se mencionó anteriormente se utilizo la libreria __PyCaret__, y los resultados se muestra en la siguiente tabla:
+
+![](1.jpeg)
+
+### Modelo Final.
+
+El modelo que presentó mayor precisión fue el modelo __Ramdon Forest Classifier__ con una precision del 80%, si bien este fue el modelo con mayor precisión se optó por escoger el modelo __Light Gradient Boosting Machine__ debido a que el primer y segundo modelo en orden de precision son modelo __(pkl)__ y estos pesan cada uno más de 100 Mb y por lo tanto no se pudieron en el aplicativo web que se diseño.
+
+¿Pero que es un modelo __Light Gradient Boosting Machine__?
+
+Es un algoritmo de Machine Learning usado para la clasificación o regresión. Este modelo está basado en árboles de decisiones apilados para corregir el entrenamiento del anterior. El modelo se entrena mediante la función de perdida y usando el algoritmo de optimización de descenso de gradiente. Debido a esto se le atribuyen la connotación de “gradient boosting”.
+
+Con ayuda de la librería __PyCaret__ que utiliza un método de entrenamiento de Cross-Validation y con un K-fold igual a __10__ , apoyados con la correlación de la variables implicadas con la variable objetivo que se muestra a continuación, se decidió que el modelo más óptimo para solucion el problema era el modelo __Light Gradient Boosting Machine__.
+
+![](2.jpeg)
+
+
+## Conclusiones.
+
+- Para un trabajo futuro, se debe plantear la realización de un estudio entre la
+relación de las variables socioeconómicas del hogar más relevantes e influyentes para el pronóstico del número de hijos de este, dicho estudio permitirá la formulación de una nueva encuesta desde la cuál se puedan extraer estas variables de una forma más simple y precisa en comparación con la ECV 2019.
+
+- El modelo diseñado en este trabajo permite pronósticar el número de hijos de una vivienda a partir de 18 variables socioeconómicas del mismo con una precisión de 75.57%.
+
+- En promedio, el número de hijos por hogar en Colombia es de 1.12 hijos. 
+
+- La variable seleccionada que más correlación presentó con el número de hijos en un hogar de colombia fue la CPH.
+
+Finalmente el modelo estará disponible en la web y puedes acceder dando click en [aquí](https://num-hijos-tae.herokuapp.com).
+
+
+## Bibliografías.
+
+1. [Santibáñez, R. Á., Hernández, P. M., & Segura, A. J. (2009). Contribución del número de hijos a la magnitud de la satisfacción marital. International Journal of Psychological Research, 2(1), 35-43.](https://www.redalyc.org/pdf/2990/299023510005.pdf)
+
+2. [Flórez, C. E. (2005). Factores socioeconómicos y contextuales que determinan la actividad reproductiva de las adolescentes en Colombia. Revista Panamericana de Salud Pública, 18, 388-402.](https://www.scielosp.org/article/rpsp/2005.v18n6/388-402)

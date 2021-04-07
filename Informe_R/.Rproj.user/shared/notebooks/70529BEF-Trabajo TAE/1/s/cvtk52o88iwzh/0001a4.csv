@@ -1,0 +1,2 @@
+"0","hist((datos2$EM[datos2$EM > 3]),main = ""Edad Madre"",xlab = ""Edad"","
+"0","     ylab = ""Frecuencia"")"

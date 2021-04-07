@@ -1,0 +1,1 @@
+"0","points(x = (mean(datos2$EP[datos2$EP > 3])),y = 0,lwd = 2,col = ""red"",pch = 16)"

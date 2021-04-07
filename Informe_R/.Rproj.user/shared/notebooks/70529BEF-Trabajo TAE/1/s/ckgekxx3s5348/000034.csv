@@ -1,0 +1,2 @@
+"0","barplot(table(datos2$EST),xaxt = ""n"",main = ""Estrato para Tarifa"","
+"0","        ylab = ""Frecuencia"")"
