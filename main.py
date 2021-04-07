@@ -12,7 +12,7 @@ res = []
 df_model = cargarModelo()
 st.title('Número de Hijos en el Hogar')
 st.subheader('Video de la Aplicación')
-st.video('https://www.youtube.com/watch?v=wUGRcnpbKhM')
+st.video('https://www.youtube.com/watch?v=uWK5PUt7Gag')
 
 st.sidebar.warning('Si no hay un padre o una madre en el hogar, por favor no modificar los campos de entrada correspondientes a este.')
 
@@ -202,3 +202,9 @@ if(sent):
   else:
     st.success('El numero de hijos(🧒) en el hogar es : '+str(result))
 
+st.subheader('Realizado por:')
+st.markdown("""Edhy Santiago Marín Arbeláez \n
+Sebastián López restrepo \n
+Valentín de la Rosa Rueda \n
+Juan José Martínez Posada \n
+David González Jiménez""")
