@@ -1,1 +1,0 @@
-"0","text(cex=1, x=c(1:12)+1, y=-4, levels(datos2$NEM), xpd=TRUE, srt=45, pos=2)"

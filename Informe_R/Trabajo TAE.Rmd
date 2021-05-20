@@ -2,11 +2,11 @@
 title: "Trabajo 1."
 subtitle: "Modelo para el pronóstico del número de hijos en un hogar de Colombia."
 author:
-- "Edhy Santiago Marín Arbeláez - 1020485778"
-- "Sebastián López restrepo - 1035436293"
-- "Valentín de la Rosa Rueda - 1152205481"
-- "Juan José Martínez Posada - 1036785428"
-- "David González Jiménez - 1017252844"
+- "Edhy Santiago Marín Arbeláez"
+- "Sebastián López restrepo"
+- "Valentín de la Rosa Rueda"
+- "Juan José Martínez Posada"
+- "David González Jiménez"
 
 date: "6/4/2021"
 output: html_document
@@ -273,19 +273,19 @@ Para construir el modelo apropiado para pronósticar el número de hijos en un h
 - $NC$: Número de Cuartos.
 - $CPH$: Cantidad de personas en el hogar.
 
-Para la selección del modelo mas apropiado y como se mencionó anteriormente se utilizo la libreria __PyCaret__, y los resultados se muestra en la siguiente tabla:
+Para la selección del modelo más apropiado y como se mencionó anteriormente se utilizo la libreria __PyCaret__, los resultados se muestran en la siguiente imagen extraída del procesamiento de datos con python:
 
 ![](1.jpeg)
 
 ### Modelo Final.
 
-El modelo que presentó mayor precisión fue el modelo __Ramdon Forest Classifier__ con una precision del 80%, si bien este fue el modelo con mayor precisión se optó por escoger el modelo __Light Gradient Boosting Machine__ debido a que el primer y segundo modelo en orden de precision son modelo __(pkl)__ y estos pesan cada uno más de 100 Mb y por lo tanto no se pudieron en el aplicativo web que se diseño.
+La métrica que decidimos tomar para la elecció del modelo fue el R2.Para esta situación el modelo que presentó mayor R2 fue el modelo __Gradient Boosting Regressor__ con un valor del 0.366 aproximadamente.
 
-¿Pero que es un modelo __Light Gradient Boosting Machine__?
+¿Pero que es un modelo __Gradient Boosting Regressor__?
 
-Es un algoritmo de Machine Learning usado para la clasificación o regresión. Este modelo está basado en árboles de decisiones apilados para corregir el entrenamiento del anterior. El modelo se entrena mediante la función de perdida y usando el algoritmo de optimización de descenso de gradiente. Debido a esto se le atribuyen la connotación de “gradient boosting”.
+Es una técnica de aprendizaje automático utilizada para el análisis de la regresión, el cual produce un modelo predictivo en forma de un conjunto de modelos de predicción débiles, típicamente árboles de decisión. El Boosting es un meta-algoritmo de aprendizaje automático que reduce el sesgo y varianza en un contexto de aprendizaje supervisado. Generalizando los modelos débiles permitiendo la optimización arbitraria de una función de pérdida.
 
-Con ayuda de la librería __PyCaret__ que utiliza un método de entrenamiento de Cross-Validation y con un K-fold igual a __10__ , apoyados con la correlación de la variables implicadas con la variable objetivo que se muestra a continuación, se decidió que el modelo más óptimo para solucion el problema era el modelo __Light Gradient Boosting Machine__.
+Con ayuda de la librería __PyCaret__ que utiliza un método de entrenamiento de Cross-Validation y con un K-fold igual a __10__ , apoyados con la correlación de la variables implicadas con la variable objetivo que se muestra a continuación, se decidió que el modelo más óptimo para la solucion del problema es el modelo __Gradient Boosting Regressor__.
 
 ![](2.jpeg)
 
@@ -295,11 +295,11 @@ Con ayuda de la librería __PyCaret__ que utiliza un método de entrenamiento de
 - Para un trabajo futuro, se debe plantear la realización de un estudio entre la
 relación de las variables socioeconómicas del hogar más relevantes e influyentes para el pronóstico del número de hijos de este, dicho estudio permitirá la formulación de una nueva encuesta desde la cuál se puedan extraer estas variables de una forma más simple y precisa en comparación con la ECV 2019.
 
-- El modelo diseñado en este trabajo permite pronósticar el número de hijos de una vivienda a partir de 18 variables socioeconómicas del mismo con una precisión de 75.57%.
+- El R2 del modelo dio como resultado un valor relativamente bajo, esto es debido a la baja correlación que existe entre las variables descriptivas frente a la variable objetivo.
 
 - En promedio, el número de hijos por hogar en Colombia es de 1.12 hijos. 
 
-- La variable seleccionada que más correlación presentó con el número de hijos en un hogar de colombia fue la CPH.
+- La variable seleccionada que más correlación presentó con el número de hijos en un hogar de colombia fue la P6240 (¿En que actividad ocupo la mayor parte del tiempo la semana pasada madre?).
 
 Finalmente el modelo estará disponible en la web y puedes acceder dando click en [aquí](https://num-hijos-tae.herokuapp.com).
 

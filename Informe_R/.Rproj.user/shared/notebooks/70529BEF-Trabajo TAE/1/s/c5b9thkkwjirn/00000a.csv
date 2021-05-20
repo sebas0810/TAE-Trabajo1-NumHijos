@@ -1,2 +1,0 @@
-"0","barplot(table(datos2$NC),main = ""Número de Cuartos"","
-"0","        ylab = ""Frecuencia"")"

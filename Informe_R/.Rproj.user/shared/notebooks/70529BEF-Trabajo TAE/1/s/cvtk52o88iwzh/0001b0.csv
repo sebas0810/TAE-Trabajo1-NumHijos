@@ -1,3 +1,0 @@
-"0","par(mfrow = c(2,2))"
-"0","hist((datos2$EP[datos2$EP > 3]),main = ""Edad Padre"",xlab = ""Edad"","
-"0","     ylab = ""Frecuencia"")"
