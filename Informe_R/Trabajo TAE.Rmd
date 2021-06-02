@@ -59,13 +59,21 @@ Mediante el lenguaje de programacion Python se agrupo la información de tal man
 
 Para la selección de variables se consideraron aquellas que podrian influir para determinar el número de hijos en el hogar basados en estudios previos [1] y [2] y siguiendo unos criterios definidos para la selección de las mismas, dichos criterios se establecieron como una serie de preguntas que permiten puntuar a las variables contenidas en las distintas bases de datos y de esta manera crear el conjunto de variables que será alimentada al modelo para poder obtener la mejor predicción posible, estas preguntas son:
 
-- ¿Como es la correlación entre esta variable y el número de hijos por hogár?: Posteriormente se realizará una matriz de correlaciones sobre las variables seleccionadas en el modelo para verificar que realmente se hayan seleccionado las variables más relevantes para la predicción.
+- ¿Cuál es la correlación entre las demás variables y el número de hijos por hogar? 
 
-- ¿cuatos registros válidos se tienen de la variable?: Haciendo una inspección sobre los registros en la base de datos se puede observar que en muchos casos se tienen registros inválidos (lo que se observa en un tipo "NaN" cuando se manipula con la libería de pandas en la limpieza del conjunto de datos) y por lo tanto, entre más registros inválidos tenga, menos información se podrá extraer de la misma.
+Posteriormente se realizará una matriz de correlaciones sobre las variables seleccionadas en el modelo para verificar que realmente se hayan seleccionado las variables más relevantes para la predicción.
 
--¿Según la visión de un experto, cuáles so las variables más influyentes a la hora de determinar el número de hijos por hogar?: Por último, se consultó en la literatura y con un experto en el tema (trabajadora social) sobre las variables que en su criterio influenciarían más la predicción del número de hijos por hogar.
+- ¿Cuántos registros válidos se tienen de la variable?
 
-Es importante remarcar que la selección de variables fue un proceso iterativo que se repitió hasta obtener un modelo con una precisión aceptable al criterio del grupo de trabajo y por lo tanto se siguió una metodología de selección de variables similar a la plateada en la "Backward Stepwise Regression". Las variables que obtuvieron mejor puntuación según los criterios de selección fueron las siguientes:
+Haciendo una inspección sobre los registros en la base de datos se puede observar que en muchos casos se tienen registros inválidos (lo que se observa en un tipo "NaN" cuando se manipula con la libería de pandas en la limpieza del conjunto de datos) y por lo tanto, entre más registros inválidos tenga, menos información se podrá extraer de la misma.
+
+- ¿Según la visión de un experto, cuáles son las variables más influyentes a la hora de determinar el número de hijos por hogar?
+
+Por último, se consultó en la literatura y con un experto en el tema (trabajadora social) sobre las variables que en su criterio influenciarían más la predicción del número de hijos por hogar.
+
+Es importante remarcar que la selección de variables fue un proceso iterativo que se repitió hasta obtener un modelo con una precisión aceptable al criterio del grupo de trabajo y por lo tanto se siguió una metodología de selección de variables similar a la plateada en la "Backward Stepwise Regression".
+
+Las variables que obtuvieron mejor puntuación según los criterios de selección fueron las siguientes:
 
 #### __Características y composición del hogar.__
 
